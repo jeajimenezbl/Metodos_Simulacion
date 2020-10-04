@@ -4,7 +4,7 @@
 using namespace std;
 
 //---- declarar constantes ---
-const int N=1;
+const int N=3;
 const double g=980;
 const double K=1e9;
 
@@ -52,7 +52,7 @@ void Cuerpo::Mueva_Omega(double dt, double Coeficiente){
 }
 
 void Cuerpo::Dibujese(void){
-  cout<<" , "<<GetX()<<"+"<<R<<"*cos(t),"<<GetY()<<"+"<<R<<"*sin(t)";
+  cout<<" , "<<GetX()<<"+"<<R<<"*cos(t),"<<GetY()<<"+"<<R<<"*sin(t),"<<x0<<"+("<<GetX()<<"-"<<x0<<")*t/7,"<<"("<<GetY()<<"+"<<R<<")"<<"*t/7";
 }
 
 //--- clase Colisionador ----
