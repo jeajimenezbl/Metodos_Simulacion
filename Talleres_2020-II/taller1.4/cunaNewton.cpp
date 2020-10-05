@@ -5,8 +5,8 @@ using namespace std;
 
 //---- declarar constantes ---
 const int N=3;
-const double g=980;
-const double K=1e9;
+const double g=980;               //[cm/s²]
+const double K=1.0e9;            //Constante elástica[kg/cm^0.5 s²]
 
 
 //-------------Constantes del PEFRL------------------
@@ -52,7 +52,7 @@ void Cuerpo::Mueva_Omega(double dt, double Coeficiente){
 }
 
 void Cuerpo::Dibujese(void){
-  cout<<" , "<<GetX()<<"+"<<R<<"*cos(t),"<<GetY()<<"+"<<R<<"*sin(t),"<<x0<<"+("<<GetX()<<"-"<<x0<<")*t/7,"<<"("<<GetY()<<"+"<<R<<")"<<"*t/7";
+  cout<<" , "<<GetX()<<"+"<<R<<"*cos(t),"<<GetY()<<"+"<<R<<"*sin(t),"<<x0<<"+("<<GetX()-x0<<")*t/7,"<<GetY()<<"*t/7";
 }
 
 //--- clase Colisionador ----
@@ -104,7 +104,7 @@ void InicieAnimacion(void)
   cout<<"set terminal gif animate"<<endl; 
   cout<<"set output 'CunaDeNewton.gif'"<<endl;
   cout<<"unset key"<<endl;
-  cout<<"set xrange[-14:34]"<<endl;
+  cout<<"set xrange[-10:20]"<<endl;
   cout<<"set yrange[-18:0]"<<endl;
   cout<<"set size ratio -1"<<endl;
   cout<<"set parametric"<<endl;
@@ -126,14 +126,14 @@ int main(void){
   int i;
   Cuerpo Pendulo[N];
   Colisionador Newton;
-  double m0=100,R0=2, L0=12;
+  double m0=0.100,R0=1.5, L0=12;
   double T=2*M_PI*sqrt(L0/g);  
-  double t,tdibujo,tmax=3*T,tcuadro=T/50,dt=0.001;
+  double t,tdibujo,tmax=3*T,tcuadro=T/50,dt=0.0001;
 
   InicieAnimacion(); //Dibujar
 
   //---------------(Theta0,Omega0,m0,R0, L0, x00)
-  Pendulo[0].Inicie(-0.5, 0,m0,R0,L0,R0);
+  Pendulo[0].Inicie(-0.26, 0,m0,R0,L0,R0);
   for(i=1;i<N;i++){
     Pendulo[i].Inicie(0, 0,m0,R0,L0,(2*i+1)*R0);
   }
