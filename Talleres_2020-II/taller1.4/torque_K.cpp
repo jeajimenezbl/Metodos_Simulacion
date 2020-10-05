@@ -6,7 +6,7 @@ using namespace std;
 //---- declarar constantes ---
 const int N=3;
 const double g=980;               //[cm/s²]
-const double K=0.1e9;            //Constante elástica[kg/cm^0.5 s²]
+const double K=10.0e9;            //Constante elástica[kg/cm^0.5 s²]
 
 
 //-------------Constantes del PEFRL------------------
@@ -123,6 +123,8 @@ void TermineCuadro(void){
 
 //-----------  Programa Principal --------------  
 int main(void){
+  cout.precision(15);
+  cout.setf(ios::fixed);
   int i;
   Cuerpo Pendulo[N];
   Colisionador Newton;
