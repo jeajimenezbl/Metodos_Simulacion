@@ -9,7 +9,6 @@ using namespace std;
 const double g=9.81;
 const double Ca=0.5;
 const double rho=1.224;
-const double A=M_PI*0.22*0.22;
 
 
 const double epsilon=0.1786178958448091e00;
@@ -44,12 +43,13 @@ void Cuerpo::Inicie(double x0,double y0,double z0,double Vx0,double Vy0,double V
 
 void Cuerpo::CalculeFuerza(void)
 {
-  vector3D Fg,Fa,Fmagnus, Ftotal;
-  double ka,km;
+  vector3D Fg,Fa,Fmagnus;
+  double ka,km,A;
+  A=M_PI*R*R;
   ka=-0.5*Ca*rho*A;
   Fg.cargue(0,0,-m*g);
-  Fa=ka*V;
-  Ftotal=Fg+Fa;
+  Fa=ka*norma(V)*V;
+  F=Fg+Fa;
 }
 
 void Cuerpo::Mueva_r(double dt, double Coeficiente){
@@ -69,7 +69,7 @@ void Cuerpo::Dibujese(void){
 //----------------- Funciones de Animacion ----------
 void InicieAnimacion(void){
   cout<<"set terminal gif animate"<<endl; 
-  cout<<"set output 'TiroParabolico.gif'"<<endl;
+  cout<<"set output 'TiroParabolicoArrastre.gif'"<<endl;
   cout<<"unset key"<<endl;
   cout<<"set xrange[0:30]"<<endl;
   cout<<"set yrange[0:5]"<<endl;
@@ -106,14 +106,14 @@ int main(void){
   double t,tdibujo,tvuelo,tcuadro=tvuelo/1000,dt=0.01;
   tvuelo=2*Vz0/g; //tiempo total de vuelo
 
-  //InicieAnimacion(); //Dibujar
+  InicieAnimacion(); //Dibujar
 
   Balon.Inicie(x0, y0,z0,Vx0,Vy0,Vz0, m,R);
 
   for(t=0,tdibujo=0 ; t<tvuelo ; t+=dt,tdibujo+=dt){
 
       //Dibujar
-     /* 
+      
     if(tdibujo>tcuadro){
     
       InicieCuadro();
@@ -123,9 +123,9 @@ int main(void){
       TermineCuadro();
       tdibujo=0;
     }
-    */
+    
    
-    cout<<Balon.Getx()<<"\t"<<Balon.Gety()<<"\t"<<Balon.Getz()<<endl;
+    //cout<<Balon.Getx()<<"\t"<<Balon.Gety()<<"\t"<<Balon.Getz()<<endl;
     //--- Muevase por PEFRL ---
     
     Balon.Mueva_r(dt,epsilon);
