@@ -94,15 +94,17 @@ int main(void){
   Vy0=0;
   Vz0=V0*sin(gamma);
   
-  double t,tdibujo,tvuelo,tcuadro=tvuelo/1000,dt=0.01;
+  double t,tdibujo,tvuelo,tcuadro=tvuelo/1000,dt=0.011;
   tvuelo=2*Vz0/g; //tiempo total de vuelo
 
-  InicieAnimacion(); //Dibujar
+  //InicieAnimacion(); //Dibujar
 
   Balon.Inicie(x0, y0,z0,Vx0,Vy0,Vz0, m,R);
 
   for(t=0,tdibujo=0 ; t<tvuelo ; t+=dt,tdibujo+=dt){
-    //Dibujar
+
+      //Dibujar
+     /* 
     if(tdibujo>tcuadro){
     
       InicieCuadro();
@@ -112,8 +114,9 @@ int main(void){
       TermineCuadro();
       tdibujo=0;
     }
+    */
    
-    //cout<<Balon.Getx()<<"\t"<<Balon.Gety()<<"\t"<<Balon.Getz()<<endl;
+    cout<<Balon.Getx()<<"\t"<<Balon.Gety()<<"\t"<<Balon.Getz()<<endl;
     //--- Muevase por PEFRL ---
     
     Balon.Mueva_r(dt,epsilon);
